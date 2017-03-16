@@ -5,6 +5,12 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"
 </head>
 <body>
+    <div id=nav-container>
+        <ul id=nav>
+            <li>Home</li>
+            <li>Profile</li>
+        </ul>
+    <div>
     {% block body %}
     <h1>Welcome to the Forum</h1>
     {% for post in posts %}
