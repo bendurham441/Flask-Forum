@@ -31,18 +31,18 @@ def get_posts(*columns):
     curs.execute(cmd)
     return curs.fetchall()
 
-def register_user(username, password):
+def register_db(username, password):
     cmd = 'select * from users;'
     curs.execute(cmd)
     for user in curs.fetchall():
         print(user)
         if user[1] == username:
-            print('username has already been taken')
-            break
+            return 'username has already been taken'
     else:
         curs.execute('''insert into users (username, password) values 
             ("{}", "{}");'''.format(username, password))
         conn.commit()
+        return 'registered successfully!'
 
 def login_db(username, password):
     cmd = 'select * from users;'
@@ -68,6 +68,12 @@ def login():
         # return redirect(url_for('index'))
     return render_template('login.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        return register_db(request.form['username'], request.form['password'])
+    return render_template('register.html')
+
 def main():
     try:
         with open('forum_schema.sql', 'r') as schema:
@@ -75,7 +81,7 @@ def main():
             print(schema)
     except:
         print('Table has already been created')
-    register_user('name', 'pass')
+    register_db('name', 'pass')
     post('This is a test title', 'This is some test content')
     print(get_posts())
     
