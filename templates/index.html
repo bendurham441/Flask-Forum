@@ -5,21 +5,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"
 </head>
 <body>
-    <div id=nav-container>
-        <ul id=nav>
-            <li>Home</li>
-            <li>Profile</li>
-        </ul>
-    <div>
-    {% block body %}
-    <h1>Welcome to the Forum</h1>
-    {% for post in posts %}
-     <div class="post">
-        <h1 class="post-title">{{ post[1] }}</h1>
-        <p class="post-user">post user goes here</p>
-        <p class="post-content">{{ post[2] }}</p>
-    </div>
-    {% endfor %}
-    {% endblock %}
+    <div id=header></div>
+    <div id=content></div>
+    <div id=footer></div>
 </body>
 </html>
